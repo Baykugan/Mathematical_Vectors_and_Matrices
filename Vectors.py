@@ -59,10 +59,42 @@ class Vector():
         return NotImplemented
 
 
-    def __mul__(self,other):
+    def __mul__(self, other):
+        'Multiplies a scalar and a vector or computes the dot product of two vectors'
         if isinstance(other, int) or isinstance(other, float):
             return Vector(*(coord * other for coord in self.coords))
+        
         elif isinstance(other, Vector):
+            if self.len != other.len:
+                raise ValueError(
+                    f'Vectors need to have the same number of elements to calculate dot product.'     
+                )
+            else:
+                return sum(self.coords[i] * other.coords[i] for i in range(self.len))
+        return NotImplemented
+     
+        
+    def __truediv__(self, other):
+        if isinstance(other, int) or isinstance(other, float):
+            return Vector(*(coord / other for coord in self.coords))
+        return NotImplemented
+
+    def __rtruediv__(self):
+        return NotImplemented
+
+
+    def __pow__(self, other):
+        if isinstance(other, int) or isinstance(other, float):
+            return Vector(*(coord ** other for coord in self.coords))
+        return NotImplemented
+
+    def __rpow__(self):
+        return NotImplemented
+    
+
+    def __matmul__(self, other) -> int:
+        'Computes the cross product of two vectors'
+        if isinstance(other, Vector):
             if self.len == other.len == 3:
                 a1, a2, a3 = self.coords
                 b1, b2, b3 = other.coords
@@ -87,42 +119,6 @@ class Vector():
                 raise ValueError(
                     f'You can only get a cross product in three and seven dimensional space'
                 )
-            
-            
-            return Vector()
-        return NotImplemented
-     
-        
-    def __truediv__(self, other):
-        if isinstance(other, int) or isinstance(other, float):
-            return Vector(*(coord / other for coord in self.coords))
-        return NotImplemented
-
-    def __rtruediv__(self, other):
-        return NotImplemented
-
-
-    def __pow__(self, other):
-        if isinstance(other, int) or isinstance(other, float):
-            return Vector(*(coord ** other for coord in self.coords))
-        return NotImplemented
-
-    def __rpow__(self):
-        return NotImplemented
-    
-
-    def __matmul__(self, other) -> int:
-        'Compute the scalar product between two vectors'
-        if not isinstance(other, Vector):
-            raise TypeError(
-                f'Cannot calculate scalar product with {str(type[other])[7:-1]}.'
-            )
-        elif self.len != other.len:
-            raise ValueError(
-                f'Vectors need to have the same number of elemnts.'     
-            )
-        else:
-            return sum(self.coords[i] * other.coords[i] for i in range(self.len))
 
 
 
@@ -143,10 +139,11 @@ print(-y)
 print(abs(x))
 print(z ** 2)
 print(~z)
-print(x @ ~x)
-print(x @ y)
-print(x * x)
+print(x * ~x)
 print(x * y)
-print(y * x)
+print(x @ x)
+print(x @ y)
+print(y @ x)
+print(u7 @ v7)
 print(u7 * v7)
 print(y.__doc__)
