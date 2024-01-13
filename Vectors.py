@@ -70,6 +70,7 @@ class Vector():
                 j = a1 * b3 - a3 * b1
                 k = a1 * b2 - a2 * b1
                 return Vector(i, -j, k)
+            
             elif self.len == other.len == 7:
                 a1, a2, a3, a4 ,a5, a6, a7 = self.coords
                 b1, b2, b3, b4 ,b5, b6, b7 = other.coords
@@ -106,7 +107,7 @@ class Vector():
             return Vector(*(coord ** other for coord in self.coords))
         return NotImplemented
 
-    def __rpow__(self, other):
+    def __rpow__(self):
         return NotImplemented
     
 
@@ -129,7 +130,7 @@ x = Vector(1, 2, 3)
 y = Vector(4, 5, 6)
 z = Vector(7, 8, 9)
 
-w = x -y
+w = x - y
 
 u7 = Vector(1, 2, 3, 4, 5, 6, 7)
 v7 = Vector(3, 4, 5, 6, 7, 8, 9)
@@ -137,11 +138,13 @@ v7 = Vector(3, 4, 5, 6, 7, 8, 9)
 print(x)
 print(y)
 print(z)
+print(w)
 print(-y) 
 print(abs(x))
 print(z ** 2)
 print(~z)
 print(x @ ~x)
+print(x @ y)
 print(x * x)
 print(x * y)
 print(y * x)
