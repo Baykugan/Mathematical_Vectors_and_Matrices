@@ -71,9 +71,17 @@ class Vector():
                 k = a1 * b2 - a2 * b1
                 return Vector(i, -j, k)
             elif self.len == other.len == 7:
-                raise NotImplementedError(
-                    f'Cross product in R7 not yet implemented'
-                )
+                a1, a2, a3, a4 ,a5, a6, a7 = self.coords
+                b1, b2, b3, b4 ,b5, b6, b7 = other.coords
+                i = a2 * b4 - a4 * b2 + a3 * b7 - a7 * b3 + a5 * b6 - a6 * b5
+                j = a3 * b5 - a5 * b3 + a4 * b1 - a1 * b4 + a6 * b7 - a7 * b6
+                k = a4 * b6 - a6 * b4 + a5 * b2 - a2 * b5 + a7 * b1 - a1 * b7
+                l = a5 * b7 - a7 * b5 + a6 * b3 - a3 * b6 + a1 * b2 - a2 * b1
+                m = a6 * b1 - a1 * b6 + a7 * b4 - a4 * b7 + a2 * b3 - a3 * b2
+                n = a7 * b2 - a2 * b7 + a1 * b5 - a5 * b1 + a3 * b4 - a4 * b3
+                o = a1 * b3 - a3 * b1 + a2 * b6 - a6 * b2 + a4 * b5 - a5 * b4
+                return Vector(i, j, k, l, m, n, o)
+
             else:
                 raise ValueError(
                     f'You can only get a cross product in three and seven dimensional space'
@@ -123,6 +131,9 @@ z = Vector(7, 8, 9)
 
 w = x -y
 
+u7 = Vector(1, 2, 3, 4, 5, 6, 7)
+v7 = Vector(3, 4, 5, 6, 7, 8, 9)
+
 print(x)
 print(y)
 print(z)
@@ -133,4 +144,6 @@ print(~z)
 print(x @ ~x)
 print(x * x)
 print(x * y)
+print(y * x)
+print(u7 * v7)
 print(y.__doc__)
