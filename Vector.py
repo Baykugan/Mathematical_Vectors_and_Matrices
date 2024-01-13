@@ -1,5 +1,5 @@
 class Vector():
-    'This is a custom made vector class'
+     
     def __init__(self, *coords) -> None:
         self.coords = coords
         if not all(isinstance(coord, int) or isinstance(coord, float) for coord in self.coords):
@@ -7,7 +7,6 @@ class Vector():
             raise TypeError(
                 f'Unsupported type, {str(wrongTypes[0])[7:-1]}, in object creation'
             )
-        self.len = len(self.coords)
 
 
     def __repr__(self) -> str:
@@ -28,9 +27,9 @@ class Vector():
 
     def __invert__(self):
         'Compute a vector that is orthogonal to this one'
-        if self.len <= 1:
+        if len(self) <= 1:
             raise TypeError(
-                f'Cannot invert vector of len {self.len}.'
+                f'Cannot invert vector of len {len(self)}.'
                 )
         
         nonzero = [0, 1]
@@ -46,9 +45,9 @@ class Vector():
 
     def __add__(self, other):
         if isinstance(other, Vector):
-            newCoords = [0 for i in range(max(self.len, other.len))]   
-            newCoords = [self[i] + val if i < self.len else val for i, val in enumerate(newCoords)]
-            newCoords = [other[i] + val if i < other.len else val for i, val in enumerate(newCoords)]
+            newCoords = [0 for i in range(max(len(self), len(other)))]   
+            newCoords = [self[i] + val if i < len(self) else val for i, val in enumerate(newCoords)]
+            newCoords = [other[i] + val if i < len(other) else val for i, val in enumerate(newCoords)]
             return Vector(*newCoords)
         return NotImplemented
 
@@ -65,12 +64,12 @@ class Vector():
             return Vector(*(coord * other for coord in self.coords))
         
         elif isinstance(other, Vector):
-            if self.len != other.len:
+            if len(self) != len(other):
                 raise ValueError(
                     f'Vectors need to have the same number of elements to calculate dot product.'     
                 )
             else:
-                return sum(self[i] * other[i] for i in range(self.len))
+                return sum(self[i] * other[i] for i in range(len(self)))
         return NotImplemented
      
         
@@ -95,7 +94,7 @@ class Vector():
     def __matmul__(self, other) -> int:
         'Computes the cross product of two vectors'
         if isinstance(other, Vector):
-            if self.len == other.len == 3:
+            if len(self) == len(other) == 3:
                 a1, a2, a3 = self.coords
                 b1, b2, b3 = other.coords
                 i = a2 * b3 - a3 * b2
@@ -103,7 +102,7 @@ class Vector():
                 k = a1 * b2 - a2 * b1
                 return Vector(i, -j, k)
             
-            elif self.len == other.len == 7:
+            elif len(self) == len(other) == 7:
                 a1, a2, a3, a4 ,a5, a6, a7 = self.coords
                 b1, b2, b3, b4 ,b5, b6, b7 = other.coords
                 i = a2 * b4 - a4 * b2 + a3 * b7 - a7 * b3 + a5 * b6 - a6 * b5
@@ -123,7 +122,7 @@ class Vector():
 
     def __eq__(self, other):
         if isinstance(other, Vector):
-            if self.len == other.len and all(self[i] == other[i] for i in range(self.len)):
+            if len(self) == len(other) and all(self[i] == other[i] for i in range(len(self))):
                 return True
             return False
         return NotImplemented
@@ -131,6 +130,10 @@ class Vector():
 
     def __getitem__(self, index):
         return self.coords[index]
+    
+
+    def __len__(self):
+        return len(self.coords)
 
 
 
