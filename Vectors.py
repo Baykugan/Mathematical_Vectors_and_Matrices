@@ -36,7 +36,7 @@ class Vector():
         nonzero = [0, 1]
         for i, val in enumerate(self.coords):
             if val and i not in nonzero:
-                nonzero.append(i)
+                nonzero.append(i) 
                 nonzero.pop(0)
 
         newCoords = [coord for coord in self.coords]
@@ -47,8 +47,8 @@ class Vector():
     def __add__(self, other):
         if isinstance(other, Vector):
             newCoords = [0 for i in range(max(self.len, other.len))]   
-            newCoords = [self.coords[i] + val if i < self.len else val for i, val in enumerate(newCoords)]
-            newCoords = [other.coords[i] + val if i < other.len else val for i, val in enumerate(newCoords)]
+            newCoords = [self[i] + val if i < self.len else val for i, val in enumerate(newCoords)]
+            newCoords = [other[i] + val if i < other.len else val for i, val in enumerate(newCoords)]
             return Vector(*newCoords)
         return NotImplemented
 
@@ -70,7 +70,7 @@ class Vector():
                     f'Vectors need to have the same number of elements to calculate dot product.'     
                 )
             else:
-                return sum(self.coords[i] * other.coords[i] for i in range(self.len))
+                return sum(self[i] * other[i] for i in range(self.len))
         return NotImplemented
      
         
@@ -119,6 +119,18 @@ class Vector():
                 raise ValueError(
                     f'You can only get a cross product in three and seven dimensional space'
                 )
+            
+
+    def __eq__(self, other):
+        if isinstance(other, Vector):
+            if self.len == other.len and all(self[i] == other[i] for i in range(self.len)):
+                return True
+            return False
+        return NotImplemented
+    
+
+    def __getitem__(self, index):
+        return self.coords[index]
 
 
 
@@ -147,3 +159,12 @@ print(y @ x)
 print(u7 @ v7)
 print(u7 * v7)
 print(y.__doc__)
+
+print(x)
+x2 = -(-x)
+print(x2)
+print(x == x2)
+print(x == 1)
+print(1 == x)
+print(x * x)
+print(y * y)
