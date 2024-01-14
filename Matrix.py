@@ -40,6 +40,13 @@ class Matrix():
     
 
 
+def idMatrix(n):
+    return Matrix(*[[1 if i == j else 0 for i in range(n)] for j in range(n)])
+
+def nullMatrix(n, m):
+    return Matrix(*[[0 for _ in range(m)] for _ in range(n)])
+    
+
 # ┌
 # │
 # └
