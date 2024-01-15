@@ -27,7 +27,7 @@ class Matrix():
             self.m.add(len(row))
             for j, num in enumerate(row):
                 coord = (i, j)
-                self.dict[coord] = num
+                self[coord] = num
             if len(self.m) > 1:
                 raise ValueError(
                     f'Rows of different length given, row {i + 1} differing by {max(self.n) - min(self.n)}.'
@@ -44,7 +44,7 @@ class Matrix():
             for j in range(self.m):
                 if j != 0:
                     ret += f', '
-                ret += f'{self.dict[(i, j)]}'
+                ret += f'{self[(i, j)]}'
             ret += f'│\n'
         return f'{ret}'
     
@@ -70,6 +70,11 @@ class Matrix():
         return Matrix(dictionary=retDict, n=self.m, m=self.n)
     
 
+    def __setitem__(self, index, value):
+        self.dict[index] = value
+
+    def __getitem__(self, index):
+        return self.dict[index]
 
 def idMatrix(n):
     return Matrix(*[[1 if i == j else 0 for i in range(n)] for j in range(n)])
