@@ -71,6 +71,9 @@ class Vector():
             else:
                 return sum(self[i] * other[i] for i in range(len(self)))
         return NotImplemented
+    
+    def __rmul__(self, other):
+        return self * other
      
         
     def __truediv__(self, other):
@@ -155,6 +158,8 @@ print(w)
 print(-y) 
 print(abs(x))
 print(z ** 2)
+print(z * 2)
+print(2 * z)
 print(~z)
 print(x * ~x)
 print(x * y)
