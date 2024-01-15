@@ -61,7 +61,8 @@ class Matrix():
         return Matrix(dictionary=retDict, n=self.n, m=self.m)
     
 
-    def transpose(self):
+    def __invert__(self):
+        'Returns a transpose matrix of this one.'
         retDict = {}
         for key, val in self.dict.items():
             y, x = key
@@ -88,7 +89,7 @@ z = Matrix(dictionary=x.dict, n=x.n, m=x.m)
 i = idMatrix(4)
 
 print(x)
-print(x.transpose())
+print(~x)
 print(-x)
 print(y)
 print(z)
