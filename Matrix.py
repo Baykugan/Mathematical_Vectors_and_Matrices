@@ -54,7 +54,7 @@ class Matrix():
             retDict[key] = -val
         return Matrix(dictionary=retDict, n=self.n, m=self.m)
     
-    def __neg__(self):
+    def __pos__(self):
         retDict = {}
         for key, val in self.dict.items():
             retDict[key] = val
