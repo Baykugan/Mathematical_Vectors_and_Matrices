@@ -127,6 +127,8 @@ class Vector():
             return False
         return NotImplemented
     
+    def __setitem__(self, index, value):
+        self.coords[index] = value
 
     def __getitem__(self, index):
         return self.coords[index]
