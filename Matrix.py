@@ -69,12 +69,61 @@ class Matrix():
             retDict[(x, y)] = val
         return Matrix(dictionary=retDict, n=self.m, m=self.n)
     
+        
+    def __add__(self, other):
+        if isinstance(other, Matrix):
+            retDict = {}
+            if self.n == other.n and self.m == other.m:
+                for key, val in self.dict.items():
+                    retDict[key] = val + other[key]
+                return Matrix(dictionary=retDict, n=self.n, m=self.m)
+            raise ValueError(
+                f'Can\'t add matrices of different sizes.'
+            )
+        else:
+            return NotImplemented
+    
+    def __sub__(self, other):
+        if isinstance(other, Matrix):
+            retDict = {}
+            if self.n == other.n and self.m == other.m:
+                for key, val in self.dict.items():
+                    retDict[key] = val - other[key]
+                return Matrix(dictionary=retDict, n=self.n, m=self.m)
+            raise ValueError(
+                f'Can\'t subtract matrices of different sizes.'
+            )
+        else:
+            return NotImplemented
+        
+    def __mul__(self, other):
+        if isinstance(other, int) or isinstance(other, float):
+            retDict = {}
+            for key, val in self.dict.items():
+                retDict[key] = val * other
+            return Matrix(dictionary=retDict, n=self.n, m=self.m)
+        else:
+            return NotImplemented
+        
+    def __rmul__(self, other):
+        return self * other
+    
+    def __truediv__(self, other):
+        if isinstance(other, int) or isinstance(other, float):
+            retDict = {}
+            for key, val in self.dict.items():
+                retDict[key] = val / other
+            return Matrix(dictionary=retDict, n=self.n, m=self.m)
+        else:
+            return NotImplemented
+
 
     def __setitem__(self, index, value):
         self.dict[index] = value
 
     def __getitem__(self, index):
         return self.dict[index]
+
 
 def idMatrix(n):
     return Matrix(*[[1 if i == j else 0 for i in range(n)] for j in range(n)])
@@ -96,6 +145,11 @@ i = idMatrix(4)
 print(x)
 print(~x)
 print(-x)
+print(x + x)
+print(x - x)
+print(x * 3)
+print(3 * -x)
+print(x / 2)
 print(y)
 print(z)
 print(i)
