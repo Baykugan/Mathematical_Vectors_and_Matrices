@@ -48,13 +48,25 @@ class Matrix():
             ret += f'│\n'
         return f'{ret}'
     
+    def __neg__(self):
+        retDict = {}
+        for key, val in self.dict.items():
+            retDict[key] = -val
+        return Matrix(dictionary=retDict, n=self.n, m=self.m)
+    
+    def __neg__(self):
+        retDict = {}
+        for key, val in self.dict.items():
+            retDict[key] = val
+        return Matrix(dictionary=retDict, n=self.n, m=self.m)
+    
 
     def transpose(self):
-        transposed = {}
+        retDict = {}
         for key, val in self.dict.items():
             y, x = key
-            transposed[(x, y)] = val
-        return Matrix(dictionary=transposed, n=self.m, m=self.n)
+            retDict[(x, y)] = val
+        return Matrix(dictionary=retDict, n=self.m, m=self.n)
     
 
 
@@ -77,6 +89,7 @@ i = idMatrix(4)
 
 print(x)
 print(x.transpose())
+print(-x)
 print(y)
 print(z)
 print(i)
