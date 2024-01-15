@@ -5,7 +5,7 @@ class Vector():
         if not all(isinstance(coord, int) or isinstance(coord, float) for coord in self.coords):
             wrongTypes = [type(coord) for coord in self.coords if type(coord) != int and type(coord) != float]
             raise TypeError(
-                f'Unsupported type, {str(wrongTypes[0])[7:-1]}, in object creation'
+                f'Unsupported type, {str(wrongTypes[0])[7:-1]}, in object creation.'
             )
 
 
@@ -59,7 +59,7 @@ class Vector():
 
 
     def __mul__(self, other):
-        'Multiplies a scalar and a vector or computes the dot product of two vectors'
+        'Multiplies a scalar and a vector or computes the dot product of two vectors.'
         if isinstance(other, int) or isinstance(other, float):
             return Vector(*(coord * other for coord in self.coords))
         
@@ -92,7 +92,7 @@ class Vector():
     
 
     def __matmul__(self, other) -> int:
-        'Computes the cross product of two vectors'
+        'Computes the cross product of two vectors.'
         if isinstance(other, Vector):
             if len(self) == len(other) == 3:
                 a1, a2, a3 = self.coords
@@ -116,7 +116,7 @@ class Vector():
 
             else:
                 raise ValueError(
-                    f'You can only get a cross product in three and seven dimensional space'
+                    f'You can only get a cross product in three and seven dimensional space.'
                 )
             
 

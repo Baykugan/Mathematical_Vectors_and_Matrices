@@ -1,5 +1,5 @@
 class Matrix():
-    'This is a custom made matrix class'
+    'This is a custom made matrix class.'
     def __init__(self, *rows, dictionary={}, n=0, m=0):
         self.dict = dictionary.copy()
         self.n = n
@@ -15,7 +15,7 @@ class Matrix():
         if not all(isinstance(val, int) or isinstance(val, float) for val in self.dict.values()):
             wrongTypes = [type(val) for val in self.dict.values() if type(val) != int and type(val) != float]
             raise TypeError(
-                f'Unsupported type, {str(wrongTypes[0])[7:-1]}, in object creation'
+                f'Unsupported type, {str(wrongTypes[0])[7:-1]}, in object creation.'
             )
             
     
