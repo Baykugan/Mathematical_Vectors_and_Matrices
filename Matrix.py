@@ -49,6 +49,14 @@ class Matrix():
         return f'{ret}'
     
 
+    def transpose(self):
+        transposed = {}
+        for key, val in self.dict.items():
+            y, x = key
+            transposed[(x, y)] = val
+        return Matrix(dictionary=transposed, n=self.m, m=self.n)
+    
+
 
 def idMatrix(n):
     return Matrix(*[[1 if i == j else 0 for i in range(n)] for j in range(n)])
@@ -62,12 +70,13 @@ def nullMatrix(n, m):
 # └
 
 
-x = Matrix((1, 2, 4), [3, 4, 5], (5, 6, 7))
+x = Matrix((1, 2, 4), [3, 4, 5], (5, 6, 7), (1, 4, 6))
 y = nullMatrix(2, 5)
 z = Matrix(dictionary=x.dict, n=x.n, m=x.m)
 i = idMatrix(4)
 
 print(x)
+print(x.transpose())
 print(y)
 print(z)
 print(i)
